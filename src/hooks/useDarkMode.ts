@@ -1,33 +1,23 @@
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { fetchDarkMode, storeDarkMode } from "../utils";
 
-const [darkMode, setDarkMode] = createSignal(false);
-
 const useDarkMode = () => {
-  const changeDarkClass = (val: boolean) => {
-    if (val) {
-      document.body.classList.add("dark");
+  const [darkMode, setDarkMode] = createSignal(fetchDarkMode());
+
+  createEffect(() => {
+    const rootEl = document.body;
+    if (darkMode()) {
+      rootEl.classList.add("dark");
+      storeDarkMode(true);
     } else {
-      document.body.classList.remove("dark");
+      rootEl.classList.remove("dark");
+      storeDarkMode(false);
     }
-  };
-
-  const changeDarkMode = (val: boolean) => {
-    changeDarkClass(val);
-    setDarkMode(val);
-    storeDarkMode(val);
-  };
-
-  const toggleDarkMode = () => {
-    changeDarkMode(!darkMode());
-  };
-
-  onMount(() => {
-    const isDarkMode = fetchDarkMode();
-    changeDarkMode(isDarkMode);
   });
 
-  return { darkMode, changeDarkMode, toggleDarkMode };
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
+  return { darkMode, toggleDarkMode };
 };
 
 export default useDarkMode;

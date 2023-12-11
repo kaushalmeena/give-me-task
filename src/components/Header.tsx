@@ -22,8 +22,8 @@ function Header() {
           </span>
         </Link>
         <nav class="mx-8 flex grow justify-end gap-5 text-slate-900 dark:text-white max-sm:hidden">
-          <Link href="/search" class="hover:opacity-60">
-            Search
+          <Link href="/tasks" class="hover:opacity-60">
+            Tasks
           </Link>
           <Link href="/report" class="hover:opacity-60">
             Report

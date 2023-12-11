@@ -13,8 +13,8 @@ export const routes: RouteDefinition[] = [
     component: lazy(() => import("./pages/task"))
   },
   {
-    path: "/search",
-    component: lazy(() => import("./pages/search"))
+    path: "/tasks",
+    component: lazy(() => import("./pages/tasks"))
   },
   {
     path: "/report",
